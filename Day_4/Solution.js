@@ -1,31 +1,34 @@
 /**
- * @param {number[]} nums
- * @param {number} p
+ * @param {number[]} skill
  * @return {number}
  */
-var minSubarray = function(nums, p) {
-    let totalSum = nums.reduce((a, b) => a + b, 0);
+// neetcode solution Hashmap to store the count of each element. 
 
-    // Find the remainder when total sum is divided by p
-    let rem = totalSum % p;
-    if (rem === 0) return 0;  // If the remainder is 0, no subarray needs to be removed
+var dividePlayers = function(skill) {
+    let total = skill.reduce((a, e) => a + e, 0); 
 
-    let prefixMod = new Map();
-    prefixMod.set(0, -1);  // Initialize to handle full prefix
-    let prefixSum = 0;
-    let minLength = nums.length;
-
-    for (let i = 0; i < nums.length; i++) {
-        prefixSum += nums[i];
-        let currentMod = prefixSum % p;
-        let targetMod = (currentMod - rem + p) % p;
-
-        if (prefixMod.has(targetMod)) {
-            minLength = Math.min(minLength, i - prefixMod.get(targetMod));
-        }
-
-        prefixMod.set(currentMod, i);
+    if( (2 * total)  % skill.length) // if this is non-zero
+        return -1; 
+    
+    let count = {}; 
+    
+    for(let s of skill) {
+        count[s] = (count[s] || 0) + 1;
     }
 
-    return minLength === nums.length ? -1 : minLength;
+    let target = (2 * total) / skill.length;
+    let chemistry = 0;   
+    for(let s of skill) {
+
+        if(!count[s]) continue; // we dont need find its pair, its already been paired
+        count[s] -= 1; 
+        
+        let diff = target - s; 
+        if(!count[diff]) return -1; // we cant find its pair
+        
+        chemistry += s * diff; 
+        count[diff] -= 1; 
+    }
+
+    return chemistry; 
 };
