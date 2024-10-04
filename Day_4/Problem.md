@@ -1,4 +1,4 @@
-# 1590. Make Sum Divisible by P
+# 2491. Divide Players Into Teams of Equal Skill
 
 ## Problem Statement
 Check the full problem description on LeetCode: [Make Sum Divisible by P](https://leetcode.com/problems/divide-players-into-teams-of-equal-skill/description/?envType=daily-question&envId=2024-10-04)
