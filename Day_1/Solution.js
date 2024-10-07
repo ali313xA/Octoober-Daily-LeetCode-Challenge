@@ -3,6 +3,7 @@
  * @param {number} k
  * @return {boolean}
  */
+// 
 var canArrange = function(arr, k) {
     const remainderCount = new Array(k).fill(0);
 
